@@ -12,6 +12,7 @@ namespace PMQLSanCauLong
 {
     public partial class FormBangGiaSan : Form
     {
+        //ghi chu
         
 
         public FormBangGiaSan()
