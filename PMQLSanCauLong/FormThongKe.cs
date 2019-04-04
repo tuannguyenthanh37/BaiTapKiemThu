@@ -39,7 +39,7 @@ namespace PMQLSanCauLong
 
         private void btnTrove_Click(object sender, EventArgs e)
         {
-            
+            this.Close();
         }
 
         private void datengaythue_ValueChanged(object sender, EventArgs e)

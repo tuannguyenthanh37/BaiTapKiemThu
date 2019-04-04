@@ -56,3 +56,6 @@ D:\New folder\DoAnNganh_DangAnhTuan_NguyenThanhTuan\PMQLSanCauLong-goc - Copy\PM
 D:\New folder\DoAnNganh_DangAnhTuan_NguyenThanhTuan\PMQLSanCauLong-goc - Copy\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.csproj.GenerateResource.Cache
 D:\New folder\DoAnNganh_DangAnhTuan_NguyenThanhTuan\PMQLSanCauLong-goc - Copy\PMQLSanCauLong\bin\Debug\PMQLSanCauLong.exe
 D:\New folder\DoAnNganh_DangAnhTuan_NguyenThanhTuan\PMQLSanCauLong-goc - Copy\PMQLSanCauLong\bin\Debug\PMQLSanCauLong.pdb
+D:\KiemThu\BaiTapKiemThu\PMQLSanCauLong\bin\Debug\PMQLSanCauLong.exe.config
+D:\KiemThu\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.exe
+D:\KiemThu\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.pdb
