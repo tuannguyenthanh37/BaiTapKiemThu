@@ -60,7 +60,16 @@ namespace PMQLSanCauLong
 
         private void btnKhongDV_Click(object sender, EventArgs e)
         {
-            
+            btnKhongDV.Visible = false;
+            btnGhiDV.Visible = false;
+            btnCapNhat.Visible = false;
+            btnSua.Visible = true;
+            btnThemDV.Visible = true;
+            btnXoaDV.Visible = true;
+
+            txtTenHH.Enabled = false;
+            txtDongia.Enabled = false;
+            txtDVT.Enabled = false;
         }
 
         private void btnSua_Click(object sender, EventArgs e)
