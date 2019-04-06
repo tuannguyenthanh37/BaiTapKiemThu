@@ -59,3 +59,6 @@ D:\New folder\DoAnNganh_DangAnhTuan_NguyenThanhTuan\PMQLSanCauLong-goc - Copy\PM
 D:\KiemThu\BaiTapKiemThu\PMQLSanCauLong\bin\Debug\PMQLSanCauLong.exe.config
 D:\KiemThu\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.exe
 D:\KiemThu\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.pdb
+C:\Users\Tuan\Desktop\BaiTapKiemThu\PMQLSanCauLong\bin\Debug\PMQLSanCauLong.exe.config
+C:\Users\Tuan\Desktop\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.exe
+C:\Users\Tuan\Desktop\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.pdb
