@@ -74,7 +74,17 @@ namespace PMQLSanCauLong
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            
+            btnKhongDV.Visible = true;
+            btnCapNhat.Visible = true;
+
+            btnSua.Visible = false;
+            btnThemDV.Visible = false;
+            btnXoaDV.Visible = false;
+
+            txtTenHH.Enabled = true;
+            txtDongia.Enabled = true;
+            txtDVT.Enabled = true;
+            txtTenHH.Focus();
         }
 
         private void btnTrove_Click(object sender, EventArgs e)
