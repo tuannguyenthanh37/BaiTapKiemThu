@@ -26,7 +26,17 @@ namespace PMQLSanCauLong
         }
         public void GanDK(DataGridViewRow r)
         {
-            
+            try
+            {
+                txtTenHH.Text = r.Cells[1].Value.ToString();
+                txtDVT.Text = r.Cells[2].Value.ToString();
+                txtDongia.Text = r.Cells[3].Value.ToString();
+            }
+            catch
+            {
+                return;
+            }
+
         }
 
         private void btnThemDV_Click(object sender, EventArgs e)
