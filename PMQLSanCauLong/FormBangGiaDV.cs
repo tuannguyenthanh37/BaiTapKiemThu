@@ -13,7 +13,13 @@ namespace PMQLSanCauLong
 {
     public partial class FormBangGiaDV : Form
     {
-        
+        string strcon = @"server=.\SQLEXPRESS;database=DBSanCauLong;integrated security=true";
+        SqlConnection conn;
+
+        SqlDataAdapter dtpDV;
+        DataSet dts = new DataSet();
+        BindingSource bdsDV = new BindingSource();
+        SqlCommand cmd = new SqlCommand();
 
         public FormBangGiaDV()
         {
@@ -22,7 +28,45 @@ namespace PMQLSanCauLong
 
         private void FormBangGiaDV_Load(object sender, EventArgs e)
         {
-            
+            conn = new SqlConnection(strcon);
+
+            dtpDV = new SqlDataAdapter("select * from dichvu", strcon);
+            dtpDV.FillSchema(dts, SchemaType.Source, "dichvu");
+            dtpDV.Fill(dts, "dichvu");
+            bdsDV.DataSource = dts;
+            bdsDV.DataMember = "dichvu";
+            dgvDSDichVu.DataSource = bdsDV;
+
+            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM dichvu", conn);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            bdsDV.DataSource = dt;
+
+            // Gán nguồn dữ liệu cho DataGridView
+            dgvDSDichVu.DataSource = bdsDV;
+
+            dgvDSDichVu.Rows[0].Selected = true;
+
+            //canh lề zữa cho tiêu đề các cột
+            dgvDSDichVu.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            //thiết lập k cho phép ng` dùng thay đổi kích thước
+            dgvDSDichVu.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvDSDichVu.ColumnHeadersHeight = 30;
+            //thiết lập chế độ đánh dấu chọn cả dòng
+            dgvDSDichVu.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            //thiết lập chế độ chỉ chọn 1 dòng lưới tại 1 thời điểm
+            dgvDSDichVu.MultiSelect = false;
+
+            //Chế độ ẩn hiện
+            btnGhiDV.Visible = false;
+            btnKhongDV.Visible = false;
+            btnCapNhat.Visible = false;
+
+            //Chế độ mờ txt
+            txtTenHH.Enabled = false;
+            txtDVT.Enabled = false;
+            txtDongia.Enabled = false;
         }
         public void GanDK(DataGridViewRow r)
         {
@@ -94,7 +138,35 @@ namespace PMQLSanCauLong
 
         private void btnCapNhat_Click(object sender, EventArgs e)
         {
-            
+            if (conn.State == ConnectionState.Closed)
+                conn.Open();
+
+            string id = dgvDSDichVu.CurrentRow.Cells["MaDV"].Value.ToString();
+            SqlCommand cmd = new SqlCommand("UPDATE dichvu Set tendv = N'" + txtTenHH.Text + "', donvitinh = N'" + txtDVT.Text + "', dongia=N'" + txtDongia.Text + "' WHERE madv = '" + id + "'", conn);
+
+            int count = cmd.ExecuteNonQuery();
+
+            if (count > 0)
+            {
+                DataRowView row = (DataRowView)bdsDV.Current; // Hàng ch?n hi?n th?i
+                row["tendv"] = txtTenHH.Text;
+                row["donvitinh"] = txtDVT.Text;
+                row["dongia"] = txtDongia.Text;
+                bdsDV.ResetCurrentItem();
+
+                MessageBox.Show("Sửa thành công!");
+                txtDongia.Enabled = false;
+                txtDVT.Enabled = false;
+                txtTenHH.Enabled = false;
+
+            }
+            else MessageBox.Show("Không sửa được!");
+            btnCapNhat.Visible = false;
+            btnGhiDV.Visible = false;
+            btnKhongDV.Visible = false;
+            btnSua.Visible = true;
+            btnThemDV.Visible = true;
+            btnXoaDV.Visible = true;
         }
 
         private void btnGhiDV_Click(object sender, EventArgs e)
