@@ -171,7 +171,36 @@ namespace PMQLSanCauLong
 
         private void btnGhiDV_Click(object sender, EventArgs e)
         {
-            
+            if (conn.State == ConnectionState.Closed)
+                conn.Open();
+
+            SqlCommand cmd = new SqlCommand("INSERT INTO dichvu VALUES(N'" + txtTenHH.Text + "',N'" + txtDVT.Text + "', N'" + txtDongia.Text + "')", conn);
+            int count = cmd.ExecuteNonQuery();
+
+            if (count > 0)
+            {
+                DataTable dt = (DataTable)bdsDV.DataSource;
+                DataRow row = dt.NewRow();
+                row["tendv"] = txtTenHH.Text;
+                row["donvitinh"] = txtDVT.Text;
+                row["dongia"] = txtDongia.Text;
+                dt.Rows.Add(row);
+
+                MessageBox.Show("Thêm mới thành công");
+                dgvDSDichVu.Update();
+                dgvDSDichVu.Refresh();
+
+            }
+            else MessageBox.Show("Không thể thêm mới");
+            btnKhongDV.Visible = false;
+            btnGhiDV.Visible = false;
+            btnCapNhat.Visible = false;
+            btnSua.Visible = true;
+            btnThemDV.Visible = true;
+            btnXoaDV.Visible = true;
+            txtTenHH.Enabled = false;
+            txtDVT.Enabled = false;
+            txtDongia.Enabled = false;
         }
 
         private void btnXoaDV_Click(object sender, EventArgs e)
