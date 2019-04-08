@@ -205,7 +205,23 @@ namespace PMQLSanCauLong
 
         private void btnXoaDV_Click(object sender, EventArgs e)
         {
-            
+            if (conn.State == ConnectionState.Closed)
+                conn.Open();
+
+            string laymahh = dgvDSDichVu.CurrentRow.Cells["MaDV"].Value.ToString();
+            SqlCommand cmd = new SqlCommand("delete from dichvu where madv='" + laymahh + "'", conn);
+            int count = cmd.ExecuteNonQuery();
+
+            if (count > 0)
+            {
+
+                DataRowView row = (DataRowView)bdsDV.Current;
+                row.Delete();
+
+                MessageBox.Show("Xóa thành công");
+
+            }
+            else MessageBox.Show("Không thể xóa");
         }
 
 
