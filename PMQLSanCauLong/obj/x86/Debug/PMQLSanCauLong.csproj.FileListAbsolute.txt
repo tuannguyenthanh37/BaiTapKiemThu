@@ -62,3 +62,14 @@ D:\KiemThu\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.pdb
 C:\Users\Tuan\Desktop\BaiTapKiemThu\PMQLSanCauLong\bin\Debug\PMQLSanCauLong.exe.config
 C:\Users\Tuan\Desktop\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.exe
 C:\Users\Tuan\Desktop\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.pdb
+D:\KiemThu\BaiTapKiemThu\PMQLSanCauLong\bin\Debug\PMQLSanCauLong.exe
+D:\KiemThu\BaiTapKiemThu\PMQLSanCauLong\bin\Debug\PMQLSanCauLong.pdb
+D:\KiemThu\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.csprojResolveAssemblyReference.cache
+D:\KiemThu\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.FormBangGiaDV.resources
+D:\KiemThu\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.FormBangGiaSan.resources
+D:\KiemThu\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.FormDSKHang.resources
+D:\KiemThu\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.FormGD.resources
+D:\KiemThu\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.FormDatSan.resources
+D:\KiemThu\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.FormThongKe.resources
+D:\KiemThu\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.Properties.Resources.resources
+D:\KiemThu\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.csproj.GenerateResource.Cache

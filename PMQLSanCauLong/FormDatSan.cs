@@ -12,6 +12,28 @@ namespace PMQLSanCauLong
 {
     public partial class FormDatSan : Form
     {
+        string strcon = @"server=desktop-jcsiium;database=DBSanCauLong;integrated security=true";
+        int co;
+
+
+        SqlDataAdapter dtpDSSan;
+        SqlDataAdapter dtpCT;
+        SqlDataAdapter dtpPTS;
+        SqlDataAdapter dtpKH;
+        SqlDataAdapter dtpDSDV;
+
+        DataSet dts = new DataSet();
+        BindingSource bdsSCL = new BindingSource();
+        BindingSource bdsCT = new BindingSource();
+        BindingSource bdsKH = new BindingSource();
+
+        BindingSource bdsPTS = new BindingSource();
+        BindingSource bdsCTTS = new BindingSource();
+        BindingSource bdsCTSan = new BindingSource();
+        BindingSource bdsDSDV = new BindingSource();
+
+        SqlConnection conn;
+        SqlCommand cmd = new SqlCommand();
        
         public FormDatSan()
         {
@@ -20,7 +42,116 @@ namespace PMQLSanCauLong
 
         private void FormDatSan_Load(object sender, EventArgs e)
         {
-            
+            conn = new SqlConnection(strcon);
+
+            btnGhiKH.Enabled = false;
+            dtpDSSan = new SqlDataAdapter("select * from sancaulong", strcon);
+            dtpDSSan.FillSchema(dts, SchemaType.Source, "sancaulong");
+            dtpDSSan.Fill(dts, "sancaulong");
+            bdsSCL.DataSource = dts;
+            bdsSCL.DataMember = "sancaulong";
+            dgvSanCL.DataSource = bdsSCL;
+
+            dtpDSDV = new SqlDataAdapter("select * from dichvu", strcon);
+            dtpDSDV.FillSchema(dts, SchemaType.Source, "dichvu");
+            dtpDSDV.Fill(dts, "dichvu");
+            bdsDSDV.DataSource = dts;
+            bdsDSDV.DataMember = "dichvu";
+
+            this.cboTenDV.DataSource = dts.Tables["dichvu"];
+            this.cboTenDV.DisplayMember = "tendv";
+            this.cboTenDV.ValueMember = "madv";
+
+            dtpCT = new SqlDataAdapter("select * from cathue", strcon);
+            dtpCT.FillSchema(dts, SchemaType.Source, "cathue");
+            dtpCT.Fill(dts, "cathue");
+            bdsCT.DataSource = dts;
+            bdsCT.DataMember = "cathue";
+            dgvTrangThai.DataSource = bdsCT;
+
+
+            dtpPTS = new SqlDataAdapter("select * from phieuthuesan", strcon);
+            dtpPTS.FillSchema(dts, SchemaType.Source, "phieuthuesan");
+            dtpPTS.Fill(dts, "phieuthuesan");
+            bdsPTS.DataSource = dts;
+            bdsPTS.DataMember = "phieuthuesan";
+
+            dtpPTS = new SqlDataAdapter("select * from ctthuesan", strcon);
+            dtpPTS.FillSchema(dts, SchemaType.Source, "ctthuesan");
+            dtpPTS.Fill(dts, "ctthuesan");
+            bdsPTS.DataSource = dts;
+            bdsPTS.DataMember = "ctthuesan";
+
+            dtpKH = new SqlDataAdapter("select * from khachhang", strcon);
+            dtpKH.FillSchema(dts, SchemaType.Source, "khachhang");
+            dtpKH.Fill(dts, "khachhang");
+            bdsKH.DataSource = dts;
+            bdsKH.DataMember = "khachhang";
+
+            //cboCathue.DataSource = bdsCT;
+            //cboCathue.DisplayMember = "MaCa";
+            //cboCathue.ValueMember = "";
+
+            //cboTenSan.DataSource = bdsSCL;
+            //cboTenSan.DisplayMember = "MaSan";
+            //cboTenSan.ValueMember = "MaSan";
+
+            dgvSanCL.RowHeadersVisible = false;
+            dgvTrangThai.RowHeadersVisible = false;
+            dgvKH.RowHeadersVisible = false;
+            dgvCTSAN.RowHeadersVisible = false;
+            dgvDatDV.RowHeadersVisible = false;
+            //thiết lập chế độ đánh dấu chọn cả dòng
+            dgvSanCL.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvTrangThai.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvCTSAN.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvKH.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvDatDV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            //thiết lập k cho phép ng` dùng thay đổi kích thước
+            dgvSanCL.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvTrangThai.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvKH.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvSanCL.ColumnHeadersHeight = 30;
+            dgvTrangThai.ColumnHeadersHeight = 30;
+            //thiet lap luoi o che do ko cho them va xoa
+            dgvSanCL.AllowUserToAddRows = false;
+            dgvSanCL.AllowUserToDeleteRows = false;
+            dgvTrangThai.AllowUserToAddRows = false;
+            dgvTrangThai.AllowUserToDeleteRows = false;
+            dgvCTSAN.AllowUserToAddRows = false;
+            dgvDatDV.AllowUserToAddRows = false;
+            dgvKH.AllowUserToDeleteRows = false;
+            dgvKH.AllowUserToAddRows = false;
+            //ko cho sửa combo
+            this.cboTenDV.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+
+            dgvTrangThai.Enabled = false;
+
+            //chon doi tuong luoi la hien hanh
+            dgvSanCL.Rows[0].Selected = true;
+            dgvTrangThai.Rows[0].Selected = true;
+            //thiet lap che do chi chon 1 dong trong luoi tai 1 thoi diem
+            dgvSanCL.MultiSelect = false;
+
+            DataGridViewCheckBoxColumn col = new DataGridViewCheckBoxColumn();
+            col.HeaderText = "Chọn";
+            dgvCTSAN.Columns.Add(col);
+
+            DataGridViewCheckBoxColumn coldv = new DataGridViewCheckBoxColumn();
+            coldv.HeaderText = "Chọn";
+            dgvDatDV.Columns.Add(coldv);
+
+            //an text
+            //cboTenSan.Enabled = false;
+            //cboCathue.Enabled = false;
+            txtTenKH.Enabled = false;
+            txtDiaChi.Enabled = false;
+            txtGhiChu.Enabled = false;
+            txtSDT.Enabled = false;
+            btnGhiKH.Enabled = false;
+
+            btnInPTS.Enabled = false;
+            dgvTrangThai_Click(sender, e);
         }
 
         private void btnDatSan_Click(object sender, EventArgs e)
@@ -30,7 +161,43 @@ namespace PMQLSanCauLong
 
         private void dgvTrangThai_Click(object sender, EventArgs e)
         {
-            
+            DataSet ds = new DataSet();
+            BindingSource bdsTTKH = new BindingSource();
+            SqlDataAdapter dtpTTKH;
+
+            btnInPTS.Enabled = false;
+            txtTenKH.Focus();
+            txtTenKH.Clear();
+            txtDiaChi.Clear();
+            txtSDT.Clear();
+            txtGhiChu.Clear();
+            btnDatSan.Enabled = true;
+            dgvKH.Enabled = true;
+            if (dgvTrangThai.SelectedRows[0].DefaultCellStyle.BackColor == Color.Red)
+            {
+                btnInPTS.Enabled = true;
+                btnDatSan.Enabled = false;
+                txtTenKH.Enabled = false;
+                txtDiaChi.Enabled = false;
+                txtSDT.Enabled = false;
+                txtGhiChu.Enabled = false;
+                dgvKH.Enabled = false;
+                dtpTTKH = new SqlDataAdapter("select tenkh,diachi,sdt,ngaythue,ghichu from khachhang, PhieuThueSan,CTThueSan where KhachHang.MaKH=PhieuThueSan.MaKH and PhieuThueSan.MaPhieuThue=CTThueSan.MaPhieuThue and CTThueSan.MaSan='" + dgvSanCL.SelectedRows[0].Cells[0].Value.ToString() + "'and CTThueSan.MaCa='" + dgvTrangThai.SelectedRows[0].Cells[0].Value.ToString() + "' and CTThueSan.NgaySDSan='" + dateNgaySDSan.Value.ToShortDateString() + "'", strcon);
+                dtpTTKH.FillSchema(ds, SchemaType.Source, "KhachHang");
+                dtpTTKH.Fill(ds, "KhachHang");
+                bdsTTKH.DataSource = ds;
+                bdsTTKH.DataMember = "KhachHang";
+
+                txtTenKH.DataBindings.Clear();
+                txtDiaChi.DataBindings.Clear();
+                txtSDT.DataBindings.Clear();
+                txtGhiChu.DataBindings.Clear();
+
+                this.txtTenKH.DataBindings.Add("text", bdsTTKH, "tenkh");
+                this.txtDiaChi.DataBindings.Add("text", bdsTTKH, "diachi");
+                this.txtSDT.DataBindings.Add("text", bdsTTKH, "sdt");
+                this.txtGhiChu.DataBindings.Add("text", bdsTTKH, "ghichu");
+            } 
         }
 
         private void dgvSanCL_Click(object sender, EventArgs e)
