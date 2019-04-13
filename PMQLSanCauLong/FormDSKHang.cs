@@ -12,7 +12,18 @@ namespace PMQLSanCauLong
 {
     public partial class FormDSKHang : Form
     {
-        
+        string strcon = @"server=DESKTOP-1HNEIAT\SQLEXPRESS;database=DBSanCauLong;integrated security=true";
+        SqlDataAdapter dtpPTS;
+        SqlDataAdapter dtpDV;
+        SqlDataAdapter dtpCTDV;
+        SqlDataAdapter dtpCTTS;
+        SqlConnection conn;
+        DataSet dts = new DataSet();
+        BindingSource bdsPTS = new BindingSource();
+        BindingSource bdsCTTS = new BindingSource();
+        BindingSource bdsDV = new BindingSource();
+        BindingSource bdsCTDV = new BindingSource();
+        int co;
 
         public FormDSKHang()
         {
