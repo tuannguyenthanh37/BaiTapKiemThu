@@ -37,7 +37,29 @@ namespace PMQLSanCauLong
 
         private void btnXoaKH_Click(object sender, EventArgs e)
         {
-            
+            if (conn.State == ConnectionState.Closed)
+                conn.Open();
+
+            string laymaphPH = dgvKH.CurrentRow.Cells[0].Value.ToString();
+            SqlCommand cmdb = new SqlCommand("delete PhieuThueSan where MaPhieuThue=" + laymaphPH, conn);
+            int count1 = cmdb.ExecuteNonQuery();
+            if (count1 > 0)
+            {
+                //int icountSelectedRow = dgvKH.SelectedRows.Count;
+                //if (icountSelectedRow == 0)
+                //    MessageBox.Show("Bạn hãy chọn dòng cần xoá!");
+                //else
+                //    foreach (DataGridViewRow row in dgvKH.SelectedRows)
+                //        if (!row.IsNewRow) dgvKH.Rows.Remove(row);
+
+                MessageBox.Show("Xóa thành công");
+                dgvKH.Refresh();
+            }
+            else
+            {
+                MessageBox.Show("Không thể xóa");
+            }
+            conn.Close();
         }
 
         private void btnTimKiem_Click(object sender, EventArgs e)
