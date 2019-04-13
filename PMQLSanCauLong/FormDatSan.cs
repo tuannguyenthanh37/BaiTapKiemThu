@@ -318,7 +318,23 @@ namespace PMQLSanCauLong
         }
         private void tongtienthanhtoan()
         {
-            
+            int tongtien = 0;
+            if (dgvDatDV.Rows.Count > 0)
+            {
+                for (int i = 0; i < dgvDatDV.Rows.Count; i++)
+                {
+                    tongtien = tongtien + int.Parse(dgvDatDV.Rows[i].Cells[4].Value.ToString());
+                }
+            }
+
+            if (dgvCTSAN.Rows.Count > 0)
+            {
+                for (int i = 0; i < dgvCTSAN.Rows.Count; i++)
+                {
+                    tongtien = tongtien + int.Parse(dgvCTSAN.Rows[i].Cells[4].Value.ToString());
+                }
+            }
+            this.txtTongTienThanhToan.Text = tongtien.ToString();
         }
 
         private void btnChon_Click(object sender, EventArgs e)
