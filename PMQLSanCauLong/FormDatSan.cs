@@ -202,7 +202,67 @@ namespace PMQLSanCauLong
 
         private void dgvSanCL_Click(object sender, EventArgs e)
         {
-            
+            dgvTrangThai.Enabled = true;
+            if (conn.State == ConnectionState.Closed)
+                conn.Open();
+
+            for (int i = 0; i < dgvTrangThai.Rows.Count; i++)
+            {
+                dgvTrangThai.Rows[i].DefaultCellStyle.BackColor = Color.White;
+
+                if (dateNgaySDSan.Value < DateTime.Now.Date)
+                {
+                    dgvTrangThai.Rows[i].DefaultCellStyle.BackColor = Color.Gray;
+                }
+                if (dateNgaySDSan.Value.Date == DateTime.Now.Date)
+                {
+                    string giobd = "" + dgvTrangThai.Rows[i].Cells[1].Value;
+                    string[] laygiobd;
+                    laygiobd = giobd.Split('h');
+                    if (int.Parse(laygiobd[0]) <= DateTime.Now.Hour)
+                    {
+                        dgvTrangThai.Rows[i].DefaultCellStyle.BackColor = Color.Gray;
+                    }
+                }
+
+                string cathue = "";
+                int ca = i + 1;
+                if (ca <= 9)
+                {
+                    cathue = "CA0" + ca.ToString();
+                }
+                else
+                {
+                    cathue = "CA" + ca.ToString();
+                }
+                SqlDataAdapter da = new SqlDataAdapter("select Cathue.MaCa from CaThue,CTThueSan,PhieuThueSan where CaThue.MaCa=CTThueSan.MaCa and PhieuThueSan.MaPhieuThue=CTThueSan.MaPhieuThue and CTThuesan.MaSan='" + dgvSanCL.SelectedRows[0].Cells[0].Value.ToString() + "' and ctthuesan.NgaySDSan='" + dateNgaySDSan.Value.ToShortDateString() + "'and cathue.MaCa='" + cathue + "'", conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                if (dt.Rows.Count > 0)
+                {
+                    dgvTrangThai.Rows[i].DefaultCellStyle.BackColor = Color.Red;
+
+                }
+
+                if (dgvCTSAN.Rows.Count > 0)
+                {
+                    int rowmasan = dgvSanCL.SelectedCells[0].RowIndex;
+                    DataGridViewRow rowms = dgvSanCL.Rows[rowmasan];
+                    string sa = rowms.Cells[0].Value.ToString();
+
+                    for (int n = 0; n < dgvCTSAN.Rows.Count; n++)
+                    {
+                        string masann = "" + dgvCTSAN.Rows[n].Cells[0].Value;
+                        string ngayy = "" + dgvCTSAN.Rows[n].Cells[3].Value;
+
+                        if (sa == masann && dgvCTSAN.Rows[n].Cells[2].Value == dgvTrangThai.Rows[i].Cells[0].Value && ngayy == dateNgaySDSan.Value.ToShortDateString())
+                        {
+                            dgvTrangThai.Rows[i].DefaultCellStyle.BackColor = Color.Aqua;
+                        }
+                    }
+                }
+            }
         }
         
         private void btnThemKH_Click(object sender, EventArgs e)
@@ -231,7 +291,33 @@ namespace PMQLSanCauLong
 
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
-            
+            SqlDataAdapter dtpTimKH;
+            BindingSource bdsTimKH = new BindingSource();
+            while (dgvKH.Rows.Count > 0)
+            {
+                dgvKH.Rows.RemoveAt(0);
+            }
+            co = 0;
+
+            if (rdiTenKH.Checked)
+            {
+                dtpTimKH = new SqlDataAdapter("select * from khachhang where tenkh like N'%" + txtTimKiem.Text + "%'", strcon);
+                dtpTimKH.FillSchema(dts, SchemaType.Source, "khachhangtim");
+                dtpTimKH.Fill(dts, "khachhangtim");
+                bdsTimKH.DataSource = dts;
+                bdsTimKH.DataMember = "khachhangtim";
+                dgvKH.DataSource = bdsTimKH;
+            }
+
+            if (rdiSDT.Checked)
+            {
+                dtpTimKH = new SqlDataAdapter("select * from khachhang where sdt like '%" + int.Parse(txtTimKiem.Text) + "%'", strcon);
+                dtpTimKH.FillSchema(dts, SchemaType.Source, "khachhangtim");
+                dtpTimKH.Fill(dts, "khachhangtim");
+                bdsTimKH.DataSource = dts;
+                bdsTimKH.DataMember = "khachhangtim";
+                dgvKH.DataSource = bdsTimKH;
+            }
         }
 
         private void cboTenDV_SelectedValueChanged(object sender, EventArgs e)
@@ -276,7 +362,7 @@ namespace PMQLSanCauLong
 
         private void dateNgaySDSan_ValueChanged(object sender, EventArgs e)
         {
-            
+            dgvTrangThai.Refresh();
         }
 
         private void btnXoaDV_Click(object sender, EventArgs e)

@@ -73,3 +73,17 @@ D:\KiemThu\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.FormDatSan.
 D:\KiemThu\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.FormThongKe.resources
 D:\KiemThu\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.Properties.Resources.resources
 D:\KiemThu\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.csproj.GenerateResource.Cache
+C:\Users\tuann\OneDrive\Máy tính\BaiTapKiemThu\PMQLSanCauLong\bin\Debug\PMQLSanCauLong.exe.config
+C:\Users\tuann\OneDrive\Máy tính\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.exe
+C:\Users\tuann\OneDrive\Máy tính\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.pdb
+C:\Users\tuann\OneDrive\Máy tính\BaiTapKiemThu\PMQLSanCauLong\bin\Debug\PMQLSanCauLong.exe
+C:\Users\tuann\OneDrive\Máy tính\BaiTapKiemThu\PMQLSanCauLong\bin\Debug\PMQLSanCauLong.pdb
+C:\Users\tuann\OneDrive\Máy tính\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.csprojResolveAssemblyReference.cache
+C:\Users\tuann\OneDrive\Máy tính\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.FormBangGiaDV.resources
+C:\Users\tuann\OneDrive\Máy tính\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.FormBangGiaSan.resources
+C:\Users\tuann\OneDrive\Máy tính\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.FormDSKHang.resources
+C:\Users\tuann\OneDrive\Máy tính\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.FormGD.resources
+C:\Users\tuann\OneDrive\Máy tính\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.FormDatSan.resources
+C:\Users\tuann\OneDrive\Máy tính\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.FormThongKe.resources
+C:\Users\tuann\OneDrive\Máy tính\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.Properties.Resources.resources
+C:\Users\tuann\OneDrive\Máy tính\BaiTapKiemThu\PMQLSanCauLong\obj\x86\Debug\PMQLSanCauLong.csproj.GenerateResource.Cache
