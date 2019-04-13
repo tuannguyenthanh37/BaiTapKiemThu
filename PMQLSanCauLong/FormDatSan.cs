@@ -264,7 +264,21 @@ namespace PMQLSanCauLong
                 }
             }
         }
-        
+
+        public void GanDV(DataGridViewRow r)
+        {
+            try
+            {
+                cboTenDV.Text = r.Cells[1].Value.ToString();
+                txtDongia.Text = r.Cells[2].Value.ToString();
+                txtSoluong.Text = r.Cells[3].Value.ToString();
+                txtThanhTien.Text = r.Cells[4].Value.ToString();
+            }
+            catch
+            {
+                return;
+            }
+        }
         private void btnThemKH_Click(object sender, EventArgs e)
         {
             txtTenKH.Clear();
@@ -344,7 +358,15 @@ namespace PMQLSanCauLong
 
         private void dgvKH_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+            try
+            {
+                DataGridViewRow r = dgvKH.Rows[e.RowIndex];
+                GanDV(r);
+            }
+            catch
+            {
+
+            }
         }
 
         private void btnTimKiem_Click(object sender, EventArgs e)
@@ -380,7 +402,18 @@ namespace PMQLSanCauLong
 
         private void cboTenDV_SelectedValueChanged(object sender, EventArgs e)
         {
-            
+            if (conn.State == ConnectionState.Closed)
+                conn.Open();
+            string s = "select dongia, donvitinh from dichvu where madv='" + cboTenDV.SelectedValue.ToString() + "' ";
+            SqlCommand cmm = new SqlCommand(s, conn);
+            SqlDataReader dr = cmm.ExecuteReader();
+            if (dr.HasRows)
+            {
+                dr.Read();
+                txtDongia.Text = dr["dongia"].ToString();
+            }
+            dr.Close();
+            conn.Close();
         }
 
         private void txtSoluong_TextChanged(object sender, EventArgs e)
@@ -390,7 +423,44 @@ namespace PMQLSanCauLong
 
         private void btnChonDV_Click(object sender, EventArgs e)
         {
-            
+            int LayMADV;
+            if (conn.State == ConnectionState.Closed)
+                conn.Open();
+            if (string.IsNullOrEmpty(this.txtSoluong.Text))
+            {
+                MessageBox.Show("Vui lòng nhập số lượng", "Thông báo");
+                txtSoluong.Focus();
+            }
+            else
+            {
+                string QueryMaDV = "select madv from dichvu where madv='" + cboTenDV.SelectedValue.ToString() + "'";
+                SqlCommand cmdMaDV = new SqlCommand(QueryMaDV, conn);
+                LayMADV = (int)cmdMaDV.ExecuteScalar();
+                double sl;
+                if (dgvDatDV.Rows.Count == 0)
+                {
+                    dgvDatDV.Rows.Add(LayMADV.ToString(), this.cboTenDV.Text, this.txtDongia.Text, this.txtSoluong.Text, this.txtThanhTien.Text);
+                }
+
+                else
+                {
+                    for (int i = 0; i < dgvDatDV.Rows.Count; i++)
+                    {
+                        if (Double.Parse(dgvDatDV.Rows[i].Cells[0].Value.ToString()) == LayMADV)
+                        {
+                            sl = Double.Parse(dgvDatDV.Rows[i].Cells[3].Value.ToString()) + (Double.Parse(txtSoluong.Text));
+                            dgvDatDV.Rows[i].Cells[3].Value = sl;
+                            dgvDatDV.Rows[i].Cells[4].Value = sl * (Double.Parse((txtDongia.Text)));
+                            break;
+                        }
+                        dgvDatDV.Rows.Add(LayMADV.ToString(), this.cboTenDV.Text, this.txtDongia.Text, this.txtSoluong.Text, this.txtThanhTien.Text);
+                    }
+                }
+
+                tongtienthanhtoan();
+                txtSoluong.Clear();
+            }
+            conn.Close();
         }
 
         private void dgvCTSAN_KeyDown(object sender, KeyEventArgs e)
