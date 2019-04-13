@@ -267,12 +267,54 @@ namespace PMQLSanCauLong
         
         private void btnThemKH_Click(object sender, EventArgs e)
         {
-            
+            txtTenKH.Clear();
+            txtDiaChi.Clear();
+            txtSDT.Clear();
+            txtGhiChu.Clear();
+            txtTimKiem.Clear();
+            btnGhiKH.Enabled = true;
+            while (dgvKH.Rows.Count > 0)
+            {
+                dgvKH.Rows.RemoveAt(0);
+            }
+            txtTenKH.Enabled = true;
+            txtDiaChi.Enabled = true;
+            txtSDT.Enabled = true;
+            txtGhiChu.Enabled = true;
+            txtTenKH.Focus();
+            txtTimKiem.Enabled = false; 
         }
 
         private void btnGhiKH_Click(object sender, EventArgs e)
         {
-            
+            if (conn.State == ConnectionState.Closed)
+                conn.Open();
+
+            co = 1;
+            if (string.IsNullOrEmpty(this.txtTenKH.Text) || string.IsNullOrEmpty(this.txtSDT.Text) || string.IsNullOrEmpty(this.txtDiaChi.Text))
+            {
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Thông báo");
+                txtTenKH.Enabled = false;
+                txtDiaChi.Enabled = false;
+                txtGhiChu.Enabled = false;
+                txtSDT.Enabled = false;
+                txtTenKH.Focus();
+            }
+            else
+            {
+                while (dgvKH.Rows.Count > 0)
+                {
+                    dgvKH.Rows.RemoveAt(0);
+                }
+                dgvKH.Rows.Add("", this.txtTenKH.Text, this.txtDiaChi.Text, this.txtSDT.Text, this.txtGhiChu.Text);
+                MessageBox.Show("Ghi thành công");
+                txtTimKiem.Enabled = true;
+                txtTenKH.Enabled = false;
+                txtDiaChi.Enabled = false;
+                txtGhiChu.Enabled = false;
+                txtSDT.Enabled = false;
+                btnGhiKH.Enabled = false;
+            }
         }
         private void tongtienthanhtoan()
         {
