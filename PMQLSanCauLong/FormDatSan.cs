@@ -308,10 +308,10 @@ namespace PMQLSanCauLong
             if (string.IsNullOrEmpty(this.txtTenKH.Text) || string.IsNullOrEmpty(this.txtSDT.Text) || string.IsNullOrEmpty(this.txtDiaChi.Text))
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Thông báo");
-                txtTenKH.Enabled = false;
-                txtDiaChi.Enabled = false;
-                txtGhiChu.Enabled = false;
-                txtSDT.Enabled = false;
+                //txtTenKH.Enabled = false;
+                //txtDiaChi.Enabled = false;
+                //txtGhiChu.Enabled = false;
+                //txtSDT.Enabled = false;
                 txtTenKH.Focus();
             }
             else
@@ -353,7 +353,62 @@ namespace PMQLSanCauLong
 
         private void btnChon_Click(object sender, EventArgs e)
         {
-            
+            if (dgvTrangThai.SelectedRows[0].DefaultCellStyle.BackColor == Color.White)
+            {
+                int result = DateTime.Compare(dateNgaySDSan.Value, DateTime.Now.Date);
+                if (result >= 0)
+                {
+                    string ngay = dateNgaySDSan.Value.ToShortDateString();
+                    int rowind1 = dgvSanCL.SelectedCells[0].RowIndex;
+                    DataGridViewRow row = dgvSanCL.Rows[rowind1];
+                    string a = row.Cells[0].Value.ToString();
+                    //
+                    int rowind2 = dgvSanCL.SelectedCells[0].RowIndex;
+                    DataGridViewRow row2 = dgvSanCL.Rows[rowind1];
+                    string b = row.Cells[1].Value.ToString();
+
+                    int rowind3 = dgvTrangThai.SelectedCells[0].RowIndex;
+                    DataGridViewRow row3 = dgvTrangThai.Rows[rowind3];
+                    string c = row3.Cells[0].Value.ToString();
+
+                    int rowind4 = dgvTrangThai.SelectedCells[0].RowIndex;
+                    DataGridViewRow row4 = dgvTrangThai.Rows[rowind4];
+                    string d = row3.Cells[3].Value.ToString();
+
+                    int rowa = dgvCTSAN.Rows.Add();
+                    DataGridViewRow rw3 = dgvCTSAN.Rows[rowa];
+                    rw3.Cells[0].Value = a;
+                    ///
+                    DataGridViewRow rw4 = dgvCTSAN.Rows[rowa];
+                    rw4.Cells[1].Value = b;
+                    //
+                    DataGridViewRow rw5 = dgvCTSAN.Rows[rowa];
+                    rw5.Cells[2].Value = c;
+
+                    DataGridViewRow rw6 = dgvCTSAN.Rows[rowa];
+                    rw6.Cells[4].Value = d;
+
+                    DataGridViewRow rw7 = dgvCTSAN.Rows[rowa];
+                    rw7.Cells[3].Value = ngay;
+
+                }
+                dgvTrangThai.SelectedRows[0].DefaultCellStyle.BackColor = Color.Aqua;
+            }
+            else
+                if (dgvTrangThai.SelectedRows[0].DefaultCellStyle.BackColor == Color.Gray)
+                {
+                    MessageBox.Show("Ngày giờ sử dụng phải lớn hơn hoặc bằng ngày giờ hệ thống");
+                }
+            if (dgvTrangThai.SelectedRows[0].DefaultCellStyle.BackColor == Color.Red)
+            {
+                MessageBox.Show("Ca này đã có người đặt", "Thông báo");
+            }
+            if (dgvTrangThai.SelectedRows[0].DefaultCellStyle.BackColor == Color.Aqua)
+            {
+                MessageBox.Show("Ca này đang được chọn", "Thông báo");
+            }
+
+            tongtienthanhtoan();
         }
 
         private void dgvKH_CellClick(object sender, DataGridViewCellEventArgs e)
