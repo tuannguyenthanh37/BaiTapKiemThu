@@ -535,7 +535,17 @@ namespace PMQLSanCauLong
 
         private void dgvCTSAN_KeyDown(object sender, KeyEventArgs e)
         {
-            
+            if (e.KeyCode != Keys.Delete || dgvCTSAN.SelectedRows.Count <= 0)
+                return;
+            if (MessageBox.Show("Bạn có muốn xóa không", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
+                return;
+            dgvCTSAN.ShowEditingIcon = true;
+            DataGridViewSelectedRowCollection select = dgvCTSAN.SelectedRows;
+            foreach (DataGridViewRow row in select)
+            {
+                dgvCTSAN.Rows.Remove(row);
+            }
+            dgvTrangThai.SelectedRows[0].Visible = true;
         }
 
         private void dgvDatDV_KeyDown(object sender, KeyEventArgs e)
