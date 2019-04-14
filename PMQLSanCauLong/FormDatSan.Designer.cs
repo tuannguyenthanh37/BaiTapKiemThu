@@ -748,7 +748,7 @@
             this.lnkCheckSan.TabIndex = 58;
             this.lnkCheckSan.TabStop = true;
             this.lnkCheckSan.Text = "Chọn hết";
-            
+            this.lnkCheckSan.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCheckSan_LinkClicked);
             // 
             // btnXoaSan
             // 
@@ -774,7 +774,7 @@
             this.btnInPTS.Size = new System.Drawing.Size(121, 49);
             this.btnInPTS.TabIndex = 55;
             this.btnInPTS.UseVisualStyleBackColor = true;
-            
+            // 
             // btnTrove
             // 
             this.btnTrove.BackColor = System.Drawing.Color.Transparent;
@@ -787,7 +787,6 @@
             this.btnTrove.Size = new System.Drawing.Size(104, 52);
             this.btnTrove.TabIndex = 30;
             this.btnTrove.UseVisualStyleBackColor = false;
-            
             // 
             // btnDatSan
             // 

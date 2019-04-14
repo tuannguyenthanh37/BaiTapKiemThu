@@ -620,7 +620,10 @@ namespace PMQLSanCauLong
 
         private void lnkCheckDV_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            
+            for (int i = 0; i < dgvDatDV.Rows.Count; i++)
+            {
+                dgvDatDV.Rows[i].Cells[5].Value = true;
+            }
         }
 
         private void txtSDT_KeyPress(object sender, KeyPressEventArgs e)
@@ -631,6 +634,14 @@ namespace PMQLSanCauLong
         private void txtSoluong_KeyPress(object sender, KeyPressEventArgs e)
         {
             
+        }
+
+        private void lnkCheckSan_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            for (int i = 0; i < dgvCTSAN.Rows.Count; i++)
+            {
+                dgvCTSAN.Rows[i].Cells[5].Value = true;
+            }
         }
 
         
