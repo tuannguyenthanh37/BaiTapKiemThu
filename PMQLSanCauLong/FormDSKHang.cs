@@ -100,7 +100,32 @@ namespace PMQLSanCauLong
 
         private void btnXoaSan_Click(object sender, EventArgs e)
         {
-            
+            if (conn.State == ConnectionState.Closed)
+                conn.Open();
+            string laymaphPH = dgvCTTS.CurrentRow.Cells[0].Value.ToString();
+            string laymasan = dgvCTTS.CurrentRow.Cells[1].Value.ToString();
+            string laymaca = dgvCTTS.CurrentRow.Cells[2].Value.ToString();
+
+
+
+            SqlCommand cmdb = new SqlCommand("delete CTThueSan where MaPhieuThue='" + laymaphPH + "' and MaSan='" + laymasan + "' and MaCa='" + laymaca + "'", conn);
+            int count1 = cmdb.ExecuteNonQuery();
+            if (count1 > 0)
+            {
+                int icountSelectedRow = dgvCTTS.SelectedRows.Count;
+                if (icountSelectedRow == 0)
+                    MessageBox.Show("Bạn hãy chọn dòng cần xoá!");
+                else
+                    foreach (DataGridViewRow row in dgvCTTS.SelectedRows)
+                        if (!row.IsNewRow) dgvCTTS.Rows.Remove(row);
+                dgvCTTS.Refresh();
+                MessageBox.Show("Xóa thành công");
+            }
+            else
+            {
+                MessageBox.Show("Không thể xóa");
+            }
+            conn.Close();
         }
 
         private void btnXoaDV_Click(object sender, EventArgs e)
