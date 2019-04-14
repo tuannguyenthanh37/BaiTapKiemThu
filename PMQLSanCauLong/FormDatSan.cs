@@ -615,7 +615,17 @@ namespace PMQLSanCauLong
 
         private void btnXoaDV_Click(object sender, EventArgs e)
         {
-            
+            for (int i = dgvDatDV.Rows.Count - 1; i >= 0; i--)
+            {
+                bool check = (bool)dgvDatDV.Rows[i].Cells[5].FormattedValue;
+                if (check == true)
+                {
+                    dgvDatDV.Rows.RemoveAt(i);
+                }
+                dgvSanCL_Click(sender, e);
+                dgvTrangThai.Refresh();
+                tongtienthanhtoan();
+            }
         }
 
         private void lnkCheckDV_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
