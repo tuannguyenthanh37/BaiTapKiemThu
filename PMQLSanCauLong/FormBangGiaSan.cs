@@ -13,7 +13,12 @@ namespace PMQLSanCauLong
     public partial class FormBangGiaSan : Form
     {
         //ghi chu
-        
+        string strcon = @"server=desktop-jcsiium;database=DBSanCauLong;integrated security=true";
+        SqlConnection conn;
+        SqlDataAdapter dtpSCL;
+
+        DataSet dts = new DataSet();
+        BindingSource bdsCT = new BindingSource();
 
         public FormBangGiaSan()
         {
@@ -22,7 +27,24 @@ namespace PMQLSanCauLong
 
         private void FormBangGiaSan_Load(object sender, EventArgs e)
         {
-            
+            conn = new SqlConnection(strcon);
+            dtpSCL = new SqlDataAdapter("select * from cathue", strcon);
+            dtpSCL.FillSchema(dts, SchemaType.Source, "cathue");
+            dtpSCL.Fill(dts, "cathue");
+            bdsCT.DataSource = dts;
+            bdsCT.DataMember = "cathue";
+            dgvThogTinSan.DataSource = bdsCT;
+            dgvThogTinSan.DataSource = bdsCT;
+            dgvThogTinSan.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvThogTinSan.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            //thiết lập k cho phép ng` dùng thay đổi kích thước
+            dgvThogTinSan.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvThogTinSan.RowHeadersVisible = false;
+            dgvThogTinSan.Rows[0].Selected = true;
+
+            btnGhi.Visible = false;
+            btnKhong.Visible = false;
+            txtGiaSan.Enabled = false;
         }
 
         private void btnTrove_Click(object sender, EventArgs e)
