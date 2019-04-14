@@ -594,7 +594,18 @@ namespace PMQLSanCauLong
 
         private void btnXoaSan_Click(object sender, EventArgs e)
         {
-            
+            for (int i = dgvCTSAN.Rows.Count - 1; i >= 0; i--)
+            {
+                bool check = (bool)dgvCTSAN.Rows[i].Cells[5].FormattedValue;
+                if (check == true)
+                {
+                    dgvCTSAN.Rows.RemoveAt(i);
+                }
+                dgvSanCL_Click(sender, e);
+                dgvTrangThai.Refresh();
+
+                tongtienthanhtoan();
+            }
         }
 
         private void dateNgaySDSan_ValueChanged(object sender, EventArgs e)
