@@ -638,12 +638,12 @@ namespace PMQLSanCauLong
 
         private void txtSDT_KeyPress(object sender, KeyPressEventArgs e)
         {
-            
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
 
         private void txtSoluong_KeyPress(object sender, KeyPressEventArgs e)
         {
-            
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
 
         private void lnkCheckSan_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
