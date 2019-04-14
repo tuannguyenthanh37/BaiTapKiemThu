@@ -77,7 +77,25 @@ namespace PMQLSanCauLong
 
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
-            
+            SqlDataAdapter dtpTimKH;
+            BindingSource bdsTimKH = new BindingSource();
+            co = 0;
+            string ngay_thue = dateNgaySDSan.Value.ToString("yyyy/MM/dd");
+            if (rdiTenKH.Checked)
+            {
+                dtpTimKH = new SqlDataAdapter("select phieuthuesan.maphieuthue as [Mã phiếu thuê],tenkh as [Tên KH],diachi as [Địa chỉ],sdt as [Số điện thoại],ngaythue as [Ngày thuê],tongtien as [Tổng tiền] from khachhang,phieuthuesan where khachhang.makh=phieuthuesan.makh and tenkh like N'%" + txtTimKiem.Text + "%' and ngaythue='" + ngay_thue + "'", strcon);
+                DataTable dt = new DataTable();
+                dtpTimKH.Fill(dt);
+                dgvKH.DataSource = dt;
+            }
+
+            if (rdiSDT.Checked)
+            {
+                dtpTimKH = new SqlDataAdapter("select phieuthuesan.maphieuthue as [Mã phiếu thuê],tenkh as [Tên KH],diachi as [Địa chỉ],sdt as [Số điện thoại],ngaythue as [Ngày thuê],tongtien as [Tổng tiền] from khachhang,phieuthuesan where khachhang.makh=phieuthuesan.makh and sdt like '%" + txtTimKiem.Text + "%' and ngaythue='" + ngay_thue + "'", strcon);
+                DataTable dt = new DataTable();
+                dtpTimKH.Fill(dt);
+                dgvKH.DataSource = dt;
+            }
         }
 
         private void btnXoaSan_Click(object sender, EventArgs e)
