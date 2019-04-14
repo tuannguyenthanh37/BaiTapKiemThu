@@ -156,7 +156,131 @@ namespace PMQLSanCauLong
 
         private void btnDatSan_Click(object sender, EventArgs e)
         {
-            
+            if (conn.State == ConnectionState.Closed)
+                conn.Open();
+            int LayMAKH;
+            int count = 0;
+
+            if (string.IsNullOrEmpty(this.txtTenKH.Text) || string.IsNullOrEmpty(this.txtSDT.Text) || string.IsNullOrEmpty(this.txtDiaChi.Text))
+            {
+
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin");
+            }
+            else
+            {
+                if (co == 1)
+                {
+                    SqlCommand cmd = new SqlCommand("INSERT INTO khachhang VALUES(N'" + txtTenKH.Text + "',N'" + txtDiaChi.Text + "', N'" + txtSDT.Text + "')", conn);
+                    count = cmd.ExecuteNonQuery();
+
+                    string QueryMaKH = "SELECT MAX(makh) FROM khachhang";
+                    SqlCommand cmdMaKH = new SqlCommand(QueryMaKH, conn);
+                    LayMAKH = (int)cmdMaKH.ExecuteScalar();
+                }
+                else
+                {
+                    count = 1;
+                    LayMAKH = int.Parse(dgvKH.CurrentRow.Cells["makh"].Value.ToString());
+                }
+
+                SqlDataAdapter dtpPTS = new SqlDataAdapter("SELECT * FROM phieuthuesan", conn);
+                SqlCommandBuilder cmbdPTS = new SqlCommandBuilder(dtpPTS);
+                dtpPTS.Fill(dts, "phieuthuesan");
+                DataRow rowPTS = dts.Tables["phieuthuesan"].NewRow();
+                rowPTS["makh"] = LayMAKH;
+                rowPTS["ngaythue"] = DateTime.Today;
+                rowPTS["TongTien"] = txtTongTienThanhToan.Text;
+                dts.Tables["phieuthuesan"].Rows.Add(rowPTS);
+                dtpPTS.Update(dts, "phieuthuesan");
+
+                string queryPTS = "SELECT MAX(maphieuthue) FROM phieuthuesan";
+                SqlCommand cmdP = new SqlCommand(queryPTS, conn);
+                int MAPTS = (int)cmdP.ExecuteScalar();
+
+                for (int i = 0; i < dgvCTSAN.Rows.Count; i++)
+                {
+                    if (dgvCTSAN.Rows[i].Cells[i].Value != null)
+                    {
+                        string ms = dgvCTSAN.Rows[i].Cells["MaSann"].Value.ToString();
+                        string ts = dgvCTSAN.Rows[i].Cells["TenSann"].Value.ToString();
+                        string mc = dgvCTSAN.Rows[i].Cells["MaCaa"].Value.ToString();
+                        string ngaysdsan = dgvCTSAN.Rows[i].Cells["NgaySDSan"].Value.ToString();
+                        string gs = dgvCTSAN.Rows[i].Cells["GiaSann"].Value.ToString();
+
+                        SqlDataAdapter dtpCTTS = new SqlDataAdapter("SELECT * FROM ctthuesan", conn);
+                        SqlCommandBuilder cmbdCTTS = new SqlCommandBuilder(dtpCTTS);
+                        dtpCTTS.Fill(dts, "ctthuesan");
+                        DataRow rowCTTS = dts.Tables["ctthuesan"].NewRow();
+                        rowCTTS["maphieuthue"] = MAPTS;
+                        rowCTTS["masan"] = ms.ToString();
+                        rowCTTS["maca"] = mc.ToString();
+                        rowCTTS["ngaysdsan"] = ngaysdsan.ToString();
+                        rowCTTS["ghichu"] = txtGhiChu.Text;
+                        dts.Tables["ctthuesan"].Rows.Add(rowCTTS);
+                        dtpCTTS.Update(dts, "ctthuesan");
+                    }
+                }
+                if (dgvDatDV.RowCount > 0)
+                {
+                    for (int i = 0; i < dgvDatDV.Rows.Count; i++)
+                    {
+                        if (dgvDatDV.Rows[i].Cells[i].Value != null)
+                        {
+                            string mdv = dgvDatDV.Rows[i].Cells["MaDV"].Value.ToString();
+                            string tdv = dgvDatDV.Rows[i].Cells["TenDV"].Value.ToString();
+                            string dg = dgvDatDV.Rows[i].Cells["Dongia"].Value.ToString();
+                            string sl = dgvDatDV.Rows[i].Cells["Soluong"].Value.ToString();
+                            string tt = dgvDatDV.Rows[i].Cells["ThanhTien"].Value.ToString();
+
+                            SqlDataAdapter dtpDatDV = new SqlDataAdapter("SELECT * FROM ctdichvu", conn);
+                            SqlCommandBuilder cmbdDatDV = new SqlCommandBuilder(dtpDatDV);
+                            dtpDatDV.Fill(dts, "ctdichvu");
+                            DataRow rowDatDV = dts.Tables["ctdichvu"].NewRow();
+                            rowDatDV["maphieuthue"] = MAPTS;
+                            rowDatDV["madv"] = mdv.ToString();
+                            rowDatDV["soluong"] = int.Parse(sl.ToString());
+                            dts.Tables["ctdichvu"].Rows.Add(rowDatDV);
+                            dtpDatDV.Update(dts, "ctdichvu");
+                        }
+                    }
+                }
+
+                if (count > 0)
+                {
+                    MessageBox.Show("Đặt sân thành công!!");
+
+                    btnDatSan.Enabled = false;
+                    dgvSanCL.Enabled = true;
+                    dgvKH.Enabled = false;
+                    dgvTrangThai.Enabled = false;
+                    dgvCTSAN.Enabled = false;
+                    dgvKH.Refresh();
+                    dgvCTSAN.Rows.Clear();
+                    dgvDatDV.Rows.Clear();
+                    dgvSanCL_Click(sender, e);
+                    txtTenKH.Clear();
+                    txtSDT.Clear();
+                    txtGhiChu.Clear();
+                    txtDiaChi.Clear();
+
+                }
+
+                else
+                    MessageBox.Show("Không thể đặt sân");
+                this.dgvTrangThai.SelectedRows[0].DefaultCellStyle.BackColor = Color.Red;
+                dgvTrangThai.Update();
+                dgvSanCL.Update();
+                dgvSanCL.Refresh();
+                dgvTrangThai.Refresh();
+                dgvTrangThai_Click(sender, e);
+                txtGhiChu.Clear();
+                btnDatSan.Enabled = false;
+                btnInPTS.Enabled = true;
+                dgvCTSAN.Enabled = false;
+                dgvDatDV.Enabled = false;
+
+                conn.Close();
+            }
         }
 
         private void dgvTrangThai_Click(object sender, EventArgs e)
