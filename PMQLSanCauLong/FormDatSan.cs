@@ -564,12 +564,32 @@ namespace PMQLSanCauLong
 
         private void dgvDatDV_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+            try
+            {
+                DataGridViewRow rdv = dgvDatDV.Rows[e.RowIndex];
+                GanDV(rdv);
+            }
+            catch { }
         }
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            
+            txtSoluong.Enabled = true;
+            int icountSelectedRow = dgvDatDV.SelectedRows.Count;
+            if (icountSelectedRow == 0)
+                 MessageBox.Show("Bạn hãy chọn dòng cần cập nhật lại dữ liệu!");
+            else if (icountSelectedRow == 1) 
+            {
+                 dgvDatDV.CurrentRow.Cells[1].Value = cboTenDV.Text;
+                 dgvDatDV.CurrentRow.Cells[2].Value = txtDongia.Text;
+                 dgvDatDV.CurrentRow.Cells[3].Value = txtSoluong.Text;
+                 dgvDatDV.CurrentRow.Cells[4].Value = txtThanhTien.Text;
+                 tongtienthanhtoan();
+            }
+
+            else 
+                 MessageBox.Show("Bạn chỉ có thể chọn 1 dòng để cập nhật lại dữ liệu!");
+
         }
 
         private void btnXoaSan_Click(object sender, EventArgs e)
