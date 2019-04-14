@@ -473,7 +473,22 @@ namespace PMQLSanCauLong
 
         private void txtSoluong_TextChanged(object sender, EventArgs e)
         {
-            
+            if (txtSoluong.Text == "" || txtDongia.Text == "")
+            {
+                txtThanhTien.Text = "";
+                return;
+            }
+            else
+            {
+                try
+                {
+                    txtThanhTien.Text = (Double.Parse(txtSoluong.Text) * Double.Parse(txtDongia.Text)).ToString();
+                }
+                catch
+                {
+                    MessageBox.Show("Giá trị nhập phải là số");
+                }
+            }
         }
 
         private void btnChonDV_Click(object sender, EventArgs e)
