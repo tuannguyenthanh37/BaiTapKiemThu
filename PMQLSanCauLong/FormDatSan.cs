@@ -550,7 +550,16 @@ namespace PMQLSanCauLong
 
         private void dgvDatDV_KeyDown(object sender, KeyEventArgs e)
         {
-            
+            if (e.KeyCode != Keys.Delete || dgvDatDV.SelectedRows.Count <= 0)
+                return;
+            if (MessageBox.Show("Bạn có muốn xóa không", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
+                return;
+            dgvDatDV.ShowEditingIcon = true;
+            DataGridViewSelectedRowCollection select = dgvDatDV.SelectedRows;
+            foreach (DataGridViewRow row in select)
+            {
+                dgvDatDV.Rows.Remove(row);
+            }
         }
 
         private void dgvDatDV_CellClick(object sender, DataGridViewCellEventArgs e)
