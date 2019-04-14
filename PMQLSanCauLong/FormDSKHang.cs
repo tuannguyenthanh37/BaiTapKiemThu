@@ -130,7 +130,29 @@ namespace PMQLSanCauLong
 
         private void btnXoaDV_Click(object sender, EventArgs e)
         {
+            if (conn.State == ConnectionState.Closed)
+                conn.Open();
+            string laymaphPH3 = dgvCTDV.CurrentRow.Cells[0].Value.ToString();
+            string laymadv = dgvCTDV.CurrentRow.Cells[1].Value.ToString();
 
+            SqlCommand cmdb = new SqlCommand("delete CTDichVu where MaPhieuThue='" + laymaphPH3 + "' and MaDV='" + laymadv + "'", conn);
+            int count1 = cmdb.ExecuteNonQuery();
+            if (count1 > 0)
+            {
+                int icountSelectedRow = dgvCTTS.SelectedRows.Count;
+                if (icountSelectedRow == 0)
+                    MessageBox.Show("Bạn hãy chọn dòng cần xoá!");
+                else
+                    foreach (DataGridViewRow row in dgvCTDV.SelectedRows)
+                        if (!row.IsNewRow) dgvCTDV.Rows.Remove(row);
+                dgvCTDV.Refresh();
+                MessageBox.Show("Xóa thành công");
+            }
+            else
+            {
+                MessageBox.Show("Không thể xóa");
+            }
+            conn.Close();
         }      
 
         private void btnTrove_Click(object sender, EventArgs e)
