@@ -49,22 +49,31 @@ namespace PMQLSanCauLong
 
         private void btnTrove_Click(object sender, EventArgs e)
         {
-            
+            this.Close();
         }
 
         private void btnGhi_Click(object sender, EventArgs e)
         {
-            
+            btnGhi.Visible = false;
+            btnKhong.Visible = false;
+            btnSua.Visible = true;
         }
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-
+            btnGhi.Visible = true;
+            btnKhong.Visible = true;
+            btnSua.Visible = false;
+            txtGiaSan.Enabled = true;
+            txtGiaSan.Focus();
         }
 
         private void btnKhong_Click(object sender, EventArgs e)
         {
-            
+            txtGiaSan.Enabled = false;
+            btnGhi.Visible = false;
+            btnKhong.Visible = false;
+            btnSua.Visible = true;
         }
     }
 }
