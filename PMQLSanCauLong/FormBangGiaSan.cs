@@ -75,5 +75,25 @@ namespace PMQLSanCauLong
             btnKhong.Visible = false;
             btnSua.Visible = true;
         }
+        public void GanDK(DataGridViewRow r)
+        {
+            try
+            {
+                txtMaCa.Text = r.Cells[0].Value.ToString();
+                txtGioBD.Text = r.Cells[1].Value.ToString();
+                txtGioKT.Text = r.Cells[2].Value.ToString();
+                txtGiaSan.Text = r.Cells[3].Value.ToString();
+            }
+            catch
+            {
+                return;
+            }
+        }
+
+        private void dgvThogTinSan_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow r = dgvThogTinSan.Rows[e.RowIndex];
+            GanDK(r);
+        }
     }
 }
