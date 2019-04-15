@@ -12,7 +12,7 @@ namespace PMQLSanCauLong
 {
     public partial class FormDSKHang : Form
     {
-        string strcon = @"server=DESKTOP-1HNEIAT\SQLEXPRESS;database=DBSanCauLong;integrated security=true";
+        string strcon = @"server=desktop-jcsiium;database=DBSanCauLong;integrated security=true";
         SqlDataAdapter dtpPTS;
         SqlDataAdapter dtpDV;
         SqlDataAdapter dtpCTDV;

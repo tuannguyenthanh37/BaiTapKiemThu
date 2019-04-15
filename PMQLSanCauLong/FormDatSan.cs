@@ -403,6 +403,19 @@ namespace PMQLSanCauLong
                 return;
             }
         }
+        public void GanDK(DataGridViewRow r)
+        {
+            try
+            {
+                txtTenKH.Text = r.Cells[1].Value.ToString();
+                txtDiaChi.Text = r.Cells[2].Value.ToString();
+                txtSDT.Text = r.Cells[3].Value.ToString();
+            }
+            catch
+            {
+                return;
+            }
+        }
         private void btnThemKH_Click(object sender, EventArgs e)
         {
             txtTenKH.Clear();
@@ -540,7 +553,9 @@ namespace PMQLSanCauLong
             try
             {
                 DataGridViewRow r = dgvKH.Rows[e.RowIndex];
-                GanDV(r);
+                //GanDV(r);
+                GanDK(r);
+                
             }
             catch
             {
