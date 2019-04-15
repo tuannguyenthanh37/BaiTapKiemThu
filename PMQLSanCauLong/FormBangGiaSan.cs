@@ -54,9 +54,29 @@ namespace PMQLSanCauLong
 
         private void btnGhi_Click(object sender, EventArgs e)
         {
+            string Gia = txtGiaSan.Text;
             btnGhi.Visible = false;
             btnKhong.Visible = false;
             btnSua.Visible = true;
+            if (conn.State == ConnectionState.Closed)
+                conn.Open();
+            string id = dgvThogTinSan.CurrentRow.Cells["MaCa"].Value.ToString();
+            string strQuery = "UPDATE cathue Set giasan=" + Gia + " WHERE maca = '" + id + "'";
+            SqlCommand cmd = new SqlCommand(strQuery, conn);
+
+            int count = cmd.ExecuteNonQuery();
+
+            if (count > 0)
+            {
+                DataRowView row = (DataRowView)bdsCT.Current;
+                row["giasan"] = Gia;
+                bdsCT.ResetCurrentItem();
+                MessageBox.Show("Sửa thành công!");
+                txtGiaSan.Text = Gia;
+                txtGiaSan.Enabled = false;
+            }
+            else MessageBox.Show("Không sửa được!");
+            conn.Close(); 
         }
 
         private void btnSua_Click(object sender, EventArgs e)
