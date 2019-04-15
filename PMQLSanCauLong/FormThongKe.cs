@@ -62,7 +62,12 @@ namespace PMQLSanCauLong
         }
         private void tongSan()
         {
-            
+            int s = 0;
+            for (int i = 0; i < dgvDTSan.Rows.Count - 1; i++)
+            {
+                s = s + int.Parse(dgvDTSan.Rows[i].Cells[4].Value.ToString());
+            }
+            this.txtDTSan.Text = s.ToString();
         }
 
         private void tongdv()
@@ -82,7 +87,20 @@ namespace PMQLSanCauLong
 
         private void datengaythue_ValueChanged(object sender, EventArgs e)
         {
-            
+            if (conn.State == ConnectionState.Closed)
+                conn.Open();
+            bdsS.Filter = "ngaythue ='" + Convert.ToDateTime(this.datengaythue.Value.ToString("MM/dd/yyyy")) + "'";
+            dgvDTSan.Refresh();
+            bdsDV.Filter = "ngaythue ='" + Convert.ToDateTime(this.datengaythue.Value.ToString("MM/dd/yyyy")) + "'";
+            dgvDTDV.Refresh();
+            tongSan();
+
+            tongdv();
+            TongDT();
+
+            dgvDTSan.Refresh();
+            dgvDTDV.Refresh();
+            conn.Close();
         }
     }
 }
