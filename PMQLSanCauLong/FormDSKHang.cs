@@ -153,11 +153,27 @@ namespace PMQLSanCauLong
                 MessageBox.Show("Không thể xóa");
             }
             conn.Close();
-        }      
+        }
+        private void dgvKH_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (conn.State == ConnectionState.Closed)
+                conn.Open();
+            string laymp = dgvKH.SelectedRows[0].Cells[0].Value.ToString();
+            SqlDataAdapter da1 = new SqlDataAdapter("select PhieuThueSan.MaPhieuThue as [Mã Phiếu Thuê], CTThueSan.MaSan as [Mã sân],CTThueSan.MaCa as [Mã ca],cathue.giasan as [Giá Sân],CTThueSan.NgaySDSan as [Ngày SD],CTThueSan.GhiChu as [Ghi chú] from Cathue,PhieuThueSan,CTThueSan where CTThueSan.MaPhieuThue=PhieuThueSan.MaPhieuThue and cathue.maca=ctthuesan.maca and CTThueSan.MaPhieuThue='" + laymp + "'", conn);
+            DataTable dt1 = new DataTable();
+            da1.Fill(dt1);
+            dgvCTTS.DataSource = dt1;
+            SqlDataAdapter da = new SqlDataAdapter("select PhieuThueSan.MaPhieuThue as [Mã Phiếu Thuê],ctdichvu.madv as [Mã DV],tendv as [Tên DV],dongia as [Đơn giá],soluong as [Số lượng] from PhieuThueSan,CTDichVu,DichVu where DichVu.MaDV=CTDichVu.MaDV and PhieuThueSan.MaPhieuThue=CTDichVu.MaPhieuThue and PhieuThueSan.MaPhieuThue='" + laymp + "'", conn);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            dgvCTDV.DataSource = dt;
+            conn.Close();
+        }
+
 
         private void btnTrove_Click(object sender, EventArgs e)
         {
-            
+            this.Close();
         }
     }
 }
