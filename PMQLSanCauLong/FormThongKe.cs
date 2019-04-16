@@ -82,7 +82,8 @@ namespace PMQLSanCauLong
 
         private void TongDT()
         {
-            
+            this.txtDTTP.Text = (int.Parse(this.txtDTSan.Text) + int.Parse(this.txtDTDVu.Text)).ToString("#,#0 Đồng");
+
         }
 
         private void btnTrove_Click(object sender, EventArgs e)
