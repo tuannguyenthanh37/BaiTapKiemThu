@@ -90,7 +90,7 @@
             this.dateNgaySDSan.Name = "dateNgaySDSan";
             this.dateNgaySDSan.Size = new System.Drawing.Size(140, 22);
             this.dateNgaySDSan.TabIndex = 0;
-            
+            this.dateNgaySDSan.ValueChanged += new System.EventHandler(this.dateNgaySDSan_ValueChanged_1);
             // 
             // groupBox2
             // 
@@ -251,7 +251,6 @@
             this.btnInPTS.Size = new System.Drawing.Size(121, 49);
             this.btnInPTS.TabIndex = 40;
             this.btnInPTS.UseVisualStyleBackColor = true;
-            
             // 
             // dgvKH
             // 
@@ -264,7 +263,6 @@
             this.dgvKH.ReadOnly = true;
             this.dgvKH.Size = new System.Drawing.Size(597, 369);
             this.dgvKH.TabIndex = 0;
-            
             // 
             // btnXoaKH
             // 
