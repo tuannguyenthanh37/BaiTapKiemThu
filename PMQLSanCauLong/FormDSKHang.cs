@@ -32,7 +32,49 @@ namespace PMQLSanCauLong
 
         private void FormDSKHang_Load(object sender, EventArgs e)
         {
-            
+            conn = new SqlConnection(strcon);
+            dtpPTS = new SqlDataAdapter("select phieuthuesan.maphieuthue,tenkh,diachi,sdt,ngaythue,tongtien from khachhang,phieuthuesan where khachhang.makh=phieuthuesan.makh", conn);
+            dtpPTS.FillSchema(dts, SchemaType.Source, "phieuthuesan");
+            dtpPTS.Fill(dts, "phieuthuesan");
+            bdsPTS.DataSource = dts;
+            bdsPTS.DataMember = "phieuthuesan";
+            dgvKH.DataSource = bdsPTS;
+
+
+            dtpCTTS = new SqlDataAdapter("select phieuthuesan.maphieuthue,ctthuesan.masan,ctthuesan.maca,ngaysdsan,ghichu from phieuthuesan,ctthuesan where phieuthuesan.maphieuthue=ctthuesan.maphieuthue", conn);
+            dtpCTTS.FillSchema(dts, SchemaType.Source, "ctthuesan");
+            dtpCTTS.Fill(dts, "ctthuesan");
+            bdsCTTS.DataSource = dts;
+            bdsCTTS.DataMember = "ctthuesan";
+            dgvCTTS.DataSource = bdsCTTS;
+
+            dtpDV = new SqlDataAdapter("select * from dichvu ", strcon);
+            dtpDV.FillSchema(dts, SchemaType.Source, "dichvu");
+            dtpDV.Fill(dts, "dichvu");
+            bdsDV.DataSource = dts;
+
+            dtpCTDV = new SqlDataAdapter("select ctdichvu.maphieuthue,ctdichvu.MaDV,TenDV,soluong,dongia from DichVu,CTDichVu where DichVu.MaDV=CTDichVu.MaDV ", strcon);
+            dtpCTDV.FillSchema(dts, SchemaType.Source, "ctdichvu");
+            dtpCTDV.Fill(dts, "ctdichvu");
+            bdsCTDV.DataSource = dts;
+            bdsCTDV.DataMember = "ctdichvu";
+            dgvCTDV.DataSource = bdsCTDV;
+
+            dtpPTS.TableMappings.Add("a", "phieuthuesan");
+            dtpPTS.TableMappings.Add("b", "ctthuesan");
+            dtpPTS.TableMappings.Add("c", "ctdichvu");
+            dtpPTS.Fill(dts);
+            dts.Tables["phieuthuesan"].Columns["maphieuthue"].ReadOnly = false;
+            dts.Relations.Add("R_PTS_CT", dts.Tables["phieuthuesan"].Columns["maphieuthue"], dts.Tables["ctthuesan"].Columns["maphieuthue"]);
+            dts.Relations.Add("R_PTS_CTDV", dts.Tables["phieuthuesan"].Columns["maphieuthue"], dts.Tables["ctdichvu"].Columns["maphieuthue"]);
+
+            dgvKH.DataSource = dts.Tables["phieuthuesan"];
+            dgvCTTS.DataSource = dts.Tables["phieuthuesan"];
+            dgvCTDV.DataSource = dts.Tables["phieuthuesan"];
+            dgvCTTS.DataMember = "R_PTS_CT";
+            dgvCTDV.DataMember = "R_PTS_CTDV";
+
+            dateNgaySDSan_ValueChanged(sender, e);
         }
 
         private void btnXoaKH_Click(object sender, EventArgs e)
