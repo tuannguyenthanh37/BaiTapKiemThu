@@ -114,7 +114,16 @@ namespace PMQLSanCauLong
         }
         private void dateNgaySDSan_ValueChanged(object sender, EventArgs e)
         {
-            
+            if (conn.State == ConnectionState.Closed)
+                conn.Open();
+            string ngay_thue = dateNgaySDSan.Value.ToString("yyyy/MM/dd");
+
+            string sql = "select phieuthuesan.maphieuthue as [Mã phiếu thuê],tenkh as [Tên KH],diachi as [Địa chỉ],sdt as [Số điện thoại],ngaythue as [Ngày thuê],tongtien as [Tổng tiền] from khachhang,phieuthuesan where khachhang.makh=phieuthuesan.makh and ngaythue='" + ngay_thue + "'";
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            SqlDataReader rd = cmd.ExecuteReader();
+            List<object> lst = rd.Cast<object>().ToList();
+            dgvKH.DataSource = lst;
+            conn.Close();
         }
 
         private void btnTimKiem_Click(object sender, EventArgs e)
