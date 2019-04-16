@@ -72,7 +72,12 @@ namespace PMQLSanCauLong
 
         private void tongdv()
         {
-           
+            int tong = 0;
+            for (int i = 0; i < dgvDTDV.Rows.Count - 1; i++)
+            {
+                tong = tong + int.Parse(dgvDTDV.Rows[i].Cells[3].Value.ToString());
+            }
+            this.txtDTDVu.Text = tong.ToString();
         }
 
         private void TongDT()
