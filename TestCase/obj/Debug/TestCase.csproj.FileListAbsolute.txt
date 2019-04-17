@@ -1,0 +1,7 @@
+C:\Users\tuann\OneDrive\Máy tính\BaiTapKiemThu\TestCase\obj\Debug\TestCase.csprojResolveAssemblyReference.cache
+C:\Users\tuann\OneDrive\Máy tính\BaiTapKiemThu\TestCase\bin\Debug\TestCase.dll
+C:\Users\tuann\OneDrive\Máy tính\BaiTapKiemThu\TestCase\bin\Debug\TestCase.pdb
+C:\Users\tuann\OneDrive\Máy tính\BaiTapKiemThu\TestCase\bin\Debug\PMQLSanCauLong.exe
+C:\Users\tuann\OneDrive\Máy tính\BaiTapKiemThu\TestCase\bin\Debug\PMQLSanCauLong.pdb
+C:\Users\tuann\OneDrive\Máy tính\BaiTapKiemThu\TestCase\obj\Debug\TestCase.dll
+C:\Users\tuann\OneDrive\Máy tính\BaiTapKiemThu\TestCase\obj\Debug\TestCase.pdb

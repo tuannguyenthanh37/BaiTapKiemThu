@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="b7cf18ab-51a4-4ef1-bece-31a6fff5807f" name="tuann@DESKTOP-JCSIIUM 2019-04-17 16:34:39" runUser="DESKTOP-JCSIIUM\tuann" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Local" id="72580833-12a8-43b4-9007-287809e22662">
+    <Description>These are default test settings for a local test run.</Description>
+    <Deployment enabled="false" runDeploymentRoot="tuann_DESKTOP-JCSIIUM 2019-04-17 16_34_39">
+      <DeploymentItem filename="C:\Users\tuann\OneDrive\Máy tính\BaiTapKiemThu\PMQLSanCauLong\bin\Debug\PMQLSanCauLong.exe" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2019-04-17T16:34:39.0196005+07:00" queuing="2019-04-17T16:34:39.0425582+07:00" start="2019-04-17T16:34:39.0470497+07:00" finish="2019-04-17T16:34:39.3988945+07:00" />
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" error="0" failed="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="TestSearchPhone" storage="c:\users\tuann\onedrive\máy tính\baitapkiemthu\testcase\bin\debug\testcase.dll" id="a2af038f-5643-70b3-e6ef-34fa6eace780">
+      <Execution id="3805e423-b96b-4ff1-bb24-432d1de2b6cd" />
+      <TestMethod codeBase="C:/Users/tuann/OneDrive/Máy tính/BaiTapKiemThu/TestCase/bin/Debug/TestCase.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestCase.TestSearch, TestCase, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestSearchPhone" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="a2af038f-5643-70b3-e6ef-34fa6eace780" executionId="3805e423-b96b-4ff1-bb24-432d1de2b6cd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="3805e423-b96b-4ff1-bb24-432d1de2b6cd" testId="a2af038f-5643-70b3-e6ef-34fa6eace780" testName="TestSearchPhone" computerName="DESKTOP-JCSIIUM" duration="00:00:00.0350432" startTime="2019-04-17T16:34:39.0550340+07:00" endTime="2019-04-17T16:34:39.3769359+07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3805e423-b96b-4ff1-bb24-432d1de2b6cd">
+    </UnitTestResult>
+  </Results>
+</TestRun>
