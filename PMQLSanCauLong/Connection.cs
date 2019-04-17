@@ -68,5 +68,25 @@ namespace PMQLSanCauLong
             }
             catch { return null; }
         }
+        // Hàm Thực thi  trả về đối tượng
+
+        public object ExecuteScalar(string sql)
+        {
+            object CS = null;
+            try
+            {
+                object result = 0;
+                KetNoi();
+                result = new SqlCommand { Connection = this.cnn, CommandType = CommandType.Text, CommandText = sql }.ExecuteScalar();
+                DongKetNoi();
+                CS = result;
+            }
+            catch
+            {
+                return null;
+
+            }
+            return CS;
+        }
     }
 }
