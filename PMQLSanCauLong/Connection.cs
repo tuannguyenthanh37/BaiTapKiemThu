@@ -54,5 +54,19 @@ namespace PMQLSanCauLong
             }
             return CS;
         }
+        // Hàm thực thi sql trả về bảng dữ liêu
+        public DataTable ExecuteData(string strQuery)
+        {
+            try
+            {
+                KetNoi();
+                SqlDataAdapter adapter = new SqlDataAdapter(strQuery, cnn);
+                DataSet dataSet = new DataSet();
+                adapter.Fill(dataSet);
+                DongKetNoi();
+                return dataSet.Tables[0];
+            }
+            catch { return null; }
+        }
     }
 }
