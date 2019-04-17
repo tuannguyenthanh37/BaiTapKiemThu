@@ -83,6 +83,11 @@ namespace PMQLSanCauLong
             dgvKH.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvCTDV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
+            //thiết lập k cho phép ng` dùng thay đổi kích thước
+            dgvCTTS.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            //dgvCTDV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvKH.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+
             dateNgaySDSan_ValueChanged_1(sender, e);
         }
 
