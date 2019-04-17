@@ -88,6 +88,18 @@ namespace PMQLSanCauLong
             //dgvCTDV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvKH.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 
+            //thiết lập chế độ chỉ chọn 1 dòng lưới tại 1 thời điểm
+            dgvCTTS.MultiSelect = false;
+            dgvKH.MultiSelect = false;
+            //tô màu
+            dgvKH.EnableHeadersVisualStyles = false;
+            dgvCTTS.EnableHeadersVisualStyles = false;
+            dgvCTDV.EnableHeadersVisualStyles = false;
+            //xóa fongf trăng
+            dgvCTDV.AllowUserToAddRows = false;
+            dgvCTTS.AllowUserToAddRows = false;
+            dgvKH.AllowUserToAddRows = false;
+
             dateNgaySDSan_ValueChanged_1(sender, e);
         }
 
