@@ -88,14 +88,6 @@ namespace PMQLSanCauLong
             bdsKH.DataSource = dts;
             bdsKH.DataMember = "khachhang";
 
-            //cboCathue.DataSource = bdsCT;
-            //cboCathue.DisplayMember = "MaCa";
-            //cboCathue.ValueMember = "";
-
-            //cboTenSan.DataSource = bdsSCL;
-            //cboTenSan.DisplayMember = "MaSan";
-            //cboTenSan.ValueMember = "MaSan";
-
             dgvSanCL.RowHeadersVisible = false;
             dgvTrangThai.RowHeadersVisible = false;
             dgvKH.RowHeadersVisible = false;
@@ -141,9 +133,6 @@ namespace PMQLSanCauLong
             coldv.HeaderText = "Chọn";
             dgvDatDV.Columns.Add(coldv);
 
-            //an text
-            //cboTenSan.Enabled = false;
-            //cboCathue.Enabled = false;
             txtTenKH.Enabled = false;
             txtDiaChi.Enabled = false;
             txtGhiChu.Enabled = false;
@@ -445,10 +434,7 @@ namespace PMQLSanCauLong
             if (string.IsNullOrEmpty(this.txtTenKH.Text) || string.IsNullOrEmpty(this.txtSDT.Text) || string.IsNullOrEmpty(this.txtDiaChi.Text))
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Thông báo");
-                //txtTenKH.Enabled = false;
-                //txtDiaChi.Enabled = false;
-                //txtGhiChu.Enabled = false;
-                //txtSDT.Enabled = false;
+
                 txtTenKH.Focus();
             }
             else

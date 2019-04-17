@@ -113,12 +113,6 @@ namespace PMQLSanCauLong
             int count1 = cmdb.ExecuteNonQuery();
             if (count1 > 0)
             {
-                //int icountSelectedRow = dgvKH.SelectedRows.Count;
-                //if (icountSelectedRow == 0)
-                //    MessageBox.Show("Bạn hãy chọn dòng cần xoá!");
-                //else
-                //    foreach (DataGridViewRow row in dgvKH.SelectedRows)
-                //        if (!row.IsNewRow) dgvKH.Rows.Remove(row);
 
                 MessageBox.Show("Xóa thành công");
                 dgvKH.Refresh();
