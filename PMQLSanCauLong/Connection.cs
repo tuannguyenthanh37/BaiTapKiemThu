@@ -31,5 +31,28 @@ namespace PMQLSanCauLong
             if (cnn.State == ConnectionState.Open)
                 cnn.Close();
         }
+
+        // Hàm thực thi câu lệnh sql
+        public int ExecuteNonQuery(string strQuery)
+        {
+            int CS = -1;
+            try
+            {
+                int result = 0;
+                if (this.cnn.State == ConnectionState.Closed)
+                {
+                    this.cnn.Open();
+                }
+                result = new SqlCommand { Connection = this.cnn, CommandType = CommandType.Text, CommandText = strQuery }.ExecuteNonQuery();
+                this.cnn.Close();
+                CS = result;
+            }
+            catch
+            {
+                return -1;
+
+            }
+            return CS;
+        }
     }
 }
