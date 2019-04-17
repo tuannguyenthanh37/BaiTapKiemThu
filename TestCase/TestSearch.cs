@@ -82,5 +82,12 @@ namespace TestCase
             DataTable dulieu = conn.ExecuteData("select * from khachhang where sdt like '%" + "090" + "%'");
             Assert.IsTrue(dulieu.Rows.Count > 0);
         }
+        [TestMethod]
+        public void TestSearchName()
+        {
+            Connection conn = new Connection();
+            DataTable dulieu = conn.ExecuteData("select * from khachhang where tenkh like N'%" + "asasr" + "%'");
+            Assert.IsTrue(dulieu.Rows.Count > 0);
+        }
     }
 }
